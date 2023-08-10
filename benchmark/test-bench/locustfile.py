@@ -37,12 +37,9 @@ class BenchmarkSetup(HttpUser):
 
         # create benchmark file with name "benchmark_<time in millisec>.csv"
         current_time = time.time()
-        print(time.strftime("%h-%m",time.localtime(current_time)))
         filename = "benchmark_" + time.strftime("%H-%M-%S",time.localtime(current_time)) + "_" + str(int(current_time*1000)) + ".csv"
         self.filename = os.path.join(self.dir, filename)
         if not os.path.exists(self.filename):
-            
-            print("PWD: " + os.getcwd() + "\n"+ self.filename+ "\n")
             open(self.filename, "w").close()
 
         # write csv header
@@ -56,7 +53,8 @@ class BenchmarkSetup(HttpUser):
 
     def request_success_listener(self, start_time, response_time, response, exception, **_kwargs):
         if exception or response.status_code != 200:
-            errors_during_test += 1
+            self.errors_during_test += 1
+            print("Error ocurred, HTTP status code was " + str(response.status_code) + "!")
             return
         
         self.saveStatistic(start_time, response_time)

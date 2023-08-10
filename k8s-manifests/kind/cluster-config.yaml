@@ -4,5 +4,5 @@ nodes:
   - role: control-plane
   - role: worker
     extraMounts:
-      - hostPath: ./bin/persistentVolume
-        containerPath: /opt/deceptionVolume
+      - hostPath: ./benchmark/jupyter-notebooks/data
+        containerPath: /opt/ldpreloadVolume/data

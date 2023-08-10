@@ -5,7 +5,7 @@
  * The folder (in that case /var/log) also have to exists, since the hole system will crash otherwise.
  */
 // #define LOG_FILE "/var/log/ldpreload.log"
-#define LOG_FILE "/workspaces/ld-preload/bin/persistentVolume/ldpreload.log"
+#define LOG_FILE "/var/log/ldpreload.log"
 
 /**
  * Limit of socketFd value that will be traced at most. Currently limits memory allocation and will be unnecessary (or at least be
