@@ -40,12 +40,12 @@ spec:
     spec:
       containers:
         - name: node-backend-without-ldprelaod
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: ${REPOSITORY_URL}/benchmark-system-under-test
           ports:
             - containerPort: 8080
         - name: node-backend-with-ldprelaod
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: ${REPOSITORY_URL}/benchmark-system-under-test
           ports:
             - containerPort: 8081

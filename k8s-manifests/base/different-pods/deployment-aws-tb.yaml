@@ -36,7 +36,7 @@ spec:
     spec:
       containers:            
         - name: benchmark-test-bench
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: ${REPOSITORY_URL}/benchmark-test-bench
           ports:
             - containerPort: 8089

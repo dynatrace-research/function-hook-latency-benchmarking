@@ -36,12 +36,12 @@ spec:
     spec:
       containers:
         - name: backend-without-ldprelaod
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: ${REPOSITORY_URL}/benchmark-system-under-test
           ports:
             - containerPort: 8080
         - name: backend-with-ldprelaod
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: ${REPOSITORY_URL}/benchmark-system-under-test
           ports:
             - containerPort: 8081
@@ -51,7 +51,7 @@ spec:
             - name: LD_PRELOAD
               value: "/opt/ldpreload.so"
         - name: benchmark-test-bench
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: ${REPOSITORY_URL}/benchmark-test-bench
           ports:
             - containerPort: 8089
