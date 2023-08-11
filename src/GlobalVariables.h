@@ -13,7 +13,7 @@
  */
 #define SOCKET_FD_LIMIT 1000
 
-#define WORD_LIST_LENGTH 3
+#define WORD_LIST_LENGTH 200
 
 /**
  * Structure Globals define all global variable that are available within the Agent.

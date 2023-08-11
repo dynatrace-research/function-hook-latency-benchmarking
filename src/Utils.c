@@ -56,7 +56,6 @@ bool containsKeyword (void* buf, size_t count) {
 	bool keywordContained = false;
 
 	for(int i = 0; i < WORD_LIST_LENGTH && keywordContained == false;i++) {	
-		// TODO compare against buf
 		if (strstr(buf, globals.wordList[i]) != NULL) {
 			simpleLogger("Match with word-list was found! The word is \"%s\".\n", globals.wordList[i]);
 			keywordContained = true;
