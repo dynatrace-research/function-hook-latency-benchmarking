@@ -1,0 +1,10 @@
+# hidden folders
+**/.*
+!./.devcontainer/**
+
+# general ignore
+**/*.log
+
+# Angular 
+**/node_modules
+!./.devcontainer/angular/dist/* # faster container build time for development

@@ -1,0 +1,68 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# benchmark-test resulting data sets
+/benchmark/jupyter-notebooks/data/*
+!/benchmark/jupyter-notebooks/data/.gitkeep
+
+# AWS deployment files with $AWS_ACCOUNT_ID and $REGION defined
+/k8s-manifests/base/same-pod/deployment-aws.yaml-specific.yaml
+/k8s-manifests/base/different-pods/deployment-aws-sut.yaml-specific.yaml
+/k8s-manifests/base/different-pods/deployment-aws-sut.yaml-specific2.yaml
+/k8s-manifests/base/different-pods/deployment-aws-tb.yaml-specific.yaml
+/k8s-manifests/base/different-pods/deployment-aws-tb.yaml-specific2.yaml
+
+# Local Benchmark Results
+#/bin/persistentVolume/benchmark_exports/*
+!/bin/persistentVolume/benchmark_exports/.gitKeep
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+**/*.o
+bin/archive/*
+!/bin/archive/.gitkeep
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/
+.history/*
+
+## .devcontainer will be preserved for other dev to start easier
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+**/*.log
+
+# System files
+.DS_Store
+Thumbs.db
