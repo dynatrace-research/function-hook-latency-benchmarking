@@ -1,6 +1,6 @@
-#include "SharedLibraries.h"
-#include "Utils.h"
-#include "GlobalVariables.h"
+#include "symbols.h"
+#include "utils.h"
+#include "globals.h"
 
 #include <arpa/inet.h>
 #include <dlfcn.h>

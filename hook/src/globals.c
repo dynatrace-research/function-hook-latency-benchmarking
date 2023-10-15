@@ -1,4 +1,4 @@
-#include "GlobalVariables.h"
+#include "globals.h"
 
 Globals globals = {
 	{0},   				// socketTracedToPort[SOCKET_FD_LIMIT]: default value for not traced - 0

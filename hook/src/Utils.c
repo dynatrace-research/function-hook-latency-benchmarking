@@ -1,6 +1,6 @@
 
-#include "Utils.h"
-#include "GlobalVariables.h"
+#include "utils.h"
+#include "globals.h"
 
 #include <string.h>
 #include <stdio.h>
