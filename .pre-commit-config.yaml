@@ -39,5 +39,5 @@ repos:
     hooks:
       - id: flake8
         name: lint with flake8
-        args: [--config, tox.ini]
+        args: [--config, ./results/tox.ini]
         files: \.py$
