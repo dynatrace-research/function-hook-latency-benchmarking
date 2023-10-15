@@ -48,7 +48,6 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.vscode/
 .history/*
 
 ## .devcontainer will be preserved for other dev to start easier

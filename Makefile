@@ -12,19 +12,19 @@ $(OUT_FOLDER)ldpreload.so: \
 						$(SRC)Main.c \
 						$(SRC)GlobalVariables.c $(SRC)GlobalVariables.h \
 						$(SRC)SharedLibraries.c $(SRC)SharedLibraries.h \
-						$(SRC)Utils.c $(SRC)Utils.h 
+						$(SRC)Utils.c $(SRC)Utils.h
 	$(CC) $(CFLAGS) -o $(OUT_FOLDER)ldpreload.so \
 		$(SRC)Main.c \
 		$(SRC)SharedLibraries.c \
 		$(SRC)Utils.c \
 		$(LIBS)
 
-# Global variable set with `export` will be set for the process. I.e. command have to be executed manually in the terminal to be within the scope of the terminal. 
-link: 
+# Global variable set with `export` will be set for the process. I.e. command have to be executed manually in the terminal to be within the scope of the terminal.
+link:
 	printf '-> Please manually execute the following code: \n   export LD_PRELOAD=/workspaces/ld-preload/bin/ldpreload.so\n'
-unlink: 
+unlink:
 	printf '-> Please manually execute the following code: \n   unset LD_PRELOAD\n'
-	
+
 clang:
 	find . -type f -iname "*.c" -o -iname "*.h" | xargs clang-format -i
 

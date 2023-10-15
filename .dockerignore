@@ -5,6 +5,6 @@
 # general ignore
 **/*.log
 
-# Angular 
+# Angular
 **/node_modules
 !./.devcontainer/angular/dist/* # faster container build time for development

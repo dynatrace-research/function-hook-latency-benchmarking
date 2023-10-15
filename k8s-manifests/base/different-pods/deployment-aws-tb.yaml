@@ -21,7 +21,7 @@ metadata:
   labels:
     app.kubernetes.io/name: tb-node
     app.kubernetes.io/part-of: benchmark
-spec:   
+spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: tb-node
@@ -34,7 +34,7 @@ spec:
         app.kubernetes.io/name: tb-node
         app.kubernetes.io/part-of: benchmark
     spec:
-      containers:            
+      containers:
         - name: benchmark-test-bench
           imagePullPolicy: Always
           image: ${REPOSITORY_URL}/benchmark-test-bench
@@ -48,4 +48,4 @@ spec:
                 - key: kubernetes.io/hostname
                   operator: In
                   values:
-                  - ${HOSTNAME} 
+                  - ${HOSTNAME}

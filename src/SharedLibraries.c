@@ -16,11 +16,11 @@ int accept(int sockfd, struct sockaddr* address, socklen_t* addrlen) {
 		unsigned short newSockfdPort = htons(address_in->sin_port);
 
 		if (newSockfdPort > 1) {
-			// Track file descriptor for later methods. 
+			// Track file descriptor for later methods.
 			globals.socketTracedToPort[newSockfd] = 1;
 		}
 	}
-	
+
 	return newSockfd;
 }
 
@@ -29,7 +29,7 @@ ssize_t read(int fd, void* buf, size_t count) {
 
 	if (fd > 2 && fd < SOCKET_FD_LIMIT && globals.socketTracedToPort[fd] > 0) {
 		if (containsKeyword(buf, count)) {
-			// We now can do some action since it contains a keyword. 
+			// We now can do some action since it contains a keyword.
 			// This case don't needs to be reached for our prototype.
 			globals.socketTracedToPort[fd] = 2;
 		}

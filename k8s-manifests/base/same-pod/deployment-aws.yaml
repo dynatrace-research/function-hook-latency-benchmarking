@@ -47,7 +47,7 @@ spec:
             - containerPort: 8081
           env:
             - name: SERVER_PORT
-              value: "8081" 
+              value: "8081"
             - name: LD_PRELOAD
               value: "/opt/ldpreload.so"
         - name: benchmark-test-bench
