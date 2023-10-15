@@ -53,7 +53,7 @@ spec:
             - name: SERVER_PORT
               value: "8081"
             - name: LD_PRELOAD
-              value: "/opt/ldpreload.so"
+              value: "/opt/readhook.so"
       affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:

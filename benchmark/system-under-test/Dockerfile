@@ -14,7 +14,7 @@ RUN ./mvnw clean install
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /opt/app
 
-COPY ldpreload.so /opt/ldpreload.so
+COPY readhook.so /opt/readhook.so
 
 EXPOSE 8080
 COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar

@@ -49,7 +49,7 @@ spec:
             - name: SERVER_PORT
               value: "8081"
             - name: LD_PRELOAD
-              value: "/opt/ldpreload.so"
+              value: "/opt/readhook.so"
         - name: benchmark-test-bench
           imagePullPolicy: IfNotPresent
           image: benchmark-test-bench

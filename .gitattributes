@@ -1,5 +1,7 @@
-mvnw  eol=lf
-*.sh  eol=lf
+Makefile    eol=lf
+*.c         eol=lf
+*.h         eol=lf
+mvnw        eol=lf
 
-*.so  binary
-*.a   binary
+*.so        binary
+*.a         binary

@@ -12,7 +12,7 @@ services:
     ports:
      - "8081:8080"
     environment:
-      - LD_PRELOAD=/opt/ldpreload.so
+      - LD_PRELOAD=/opt/readhook.so
 
   test-bench:
     image: benchmark-test-bench
