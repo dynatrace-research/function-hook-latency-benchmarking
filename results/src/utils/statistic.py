@@ -46,6 +46,8 @@ def test_dataframe(
     df = pd.DataFrame.from_dict(result)
     df.set_index("condition", inplace=True)
 
+    same_cluster_local_ratio = df.loc["same-cluster", "sp"] / df.loc["local", "sp"]
+
     # fmt: off
     macros = []
     macros.append(f"\\newcommand{{\\TestMeasurementPeriodSize}}{{{sample_size:,d}}}")
@@ -57,7 +59,7 @@ def test_dataframe(
     macros.append(f"\\newcommand{{\\TestResultSamePodStdPool}}{{{df.loc['same-pod', 'sp']:.2f}}}")
     macros.append(f"\\newcommand{{\\TestResultSameClusterPValue}}{{{df.loc['same-cluster', 'p-value']:.4f}}}")
     macros.append(f"\\newcommand{{\\TestResultSameClusterStdPool}}{{{df.loc['same-cluster', 'sp']:.2f}}}")
-    macros.append(f"\\newcommand{{\\TestResultDockerSameClusterStdPoolRate}}{{{df.loc['same-cluster', 'sp'] / df.loc['local', 'sp']:.1f}}}")
+    macros.append(f"\\newcommand{{\\TestResultDockerSameClusterStdPoolRate}}{{{same_cluster_local_ratio:.1f}}}")
     # fmt: on
 
     print("\n".join(macros))

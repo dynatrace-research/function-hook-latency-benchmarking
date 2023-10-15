@@ -1,0 +1,15 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.git": true,
+    "**/.mypy_cache": true,
+    "**/.pytest_cache": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "flake8.args": [
+    "--config=${workspaceFolder}/tox.ini"
+  ]
+}
