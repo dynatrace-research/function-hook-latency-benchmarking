@@ -1,5 +1,5 @@
-# ------------ build ------------
-FROM eclipse-temurin:17-jdk-jammy as builder
+FROM eclipse-temurin:21-jdk-jammy AS builder
+
 WORKDIR /opt/app
 
 COPY .mvn/ .mvn
@@ -7,15 +7,14 @@ COPY mvnw pom.xml ./
 RUN ./mvnw dependency:go-offline
 
 COPY ./src ./src
-RUN ./mvnw clean install
+RUN ./mvnw clean package
 
+FROM eclipse-temurin:21-jre-jammy
 
-# ------------ run ------------
-FROM eclipse-temurin:17-jre-jammy
 WORKDIR /opt/app
 
-COPY readhook.so /opt/readhook.so
+COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
 
 EXPOSE 8080
-COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
+
 ENTRYPOINT ["java", "-jar", "/opt/app/*.jar" ]

@@ -41,3 +41,11 @@ repos:
         name: lint with flake8
         args: [--config, ./results/tox.ini]
         files: \.py$
+
+  # java projects
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.11.0
+    hooks:
+      - id: pretty-format-java
+        args: [--autofix]
+        files: \.java$

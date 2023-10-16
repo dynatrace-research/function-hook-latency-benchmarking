@@ -1,6 +1,6 @@
 # IDEs and Editors
 .idea/
-.vscode/
+.vscode/*
 !.vscode/settings.json
 .project
 .classpath
