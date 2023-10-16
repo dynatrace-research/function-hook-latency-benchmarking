@@ -34,6 +34,7 @@ class BenchmarkSetup(HttpUser):
             self.environment.runner.quit()
 
     def on_start(self):
+        self._reset_buffer()
         self._create_csv_file()
         assert self.results_filepath is not None
         self.environment.events.request.add_listener(self.request_success_listener)
@@ -41,6 +42,8 @@ class BenchmarkSetup(HttpUser):
 
     def on_stop(self):
         self._write_buffer()
+        self._reset_buffer()
+        self.environment.events.request.remove_listener(self.request_success_listener)
         print(f"suite finished. results written to {self.results_filepath}")
 
     def request_success_listener(
@@ -52,8 +55,15 @@ class BenchmarkSetup(HttpUser):
 
         self._add_measurement_to_buffer(start_time, response_time)
 
+    def _reset_buffer(self):
+        self.results_buffer = []
+        self.results_last_written_index = -1
+
     def _create_csv_file(self):
         self.results_directory.mkdir(parents=True, exist_ok=True)
+
+        # clear old file paths
+        self.results_filepath = None
 
         now = time.time()
         filename = f"benchmark_{time.strftime('%H-%M-%S', time.localtime(now))}_{int(now * 1000)}.csv"
