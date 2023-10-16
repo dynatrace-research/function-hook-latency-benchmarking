@@ -4,7 +4,7 @@ CFLAGS 		:= $(DEV_FLAGS) -std=gnu99 -shared -fPIC
 LIBS 		:= -ldl
 
 SRC 		:= ./src
-OUT 		:= ../benchmark/system-under-test
+OUT 		:= ./out
 
 default: $(OUT)/readhook.so
 
