@@ -1,105 +1,88 @@
-import csv
-import os
+import tempfile
 import time
+from pathlib import Path
 
-import numpy as np
 from locust import HttpUser, run_single_user, task
-
-# commandline options https://github.com/SvenskaSpel/locust-plugins#command-line-options
-# locust -f any-locustfile-that-imports-locust_plugins.py --help
 
 
 class BenchmarkSetup(HttpUser):
-    # locust variable
+    # instruct Locust to ignore the weight property
     fixed_count = 1
 
-    # object variables
+    # number of HTTP requests to be sent per run
     request_repetitions = 50_000
 
-    # variables for csv export
-    dir = "cvs_exports"
-    filename = None  # will defined later since time when executed is included
+    # location where result csv files will be stored
+    results_directory = Path(tempfile.gettempdir()).joinpath("benchmark_results")
+    results_filepath = None
 
-    errors_during_test = 0
-    csv_next_row_id = 0
-    csv_logs_buffer_size = request_repetitions // 10
-    csv_logs_colums_count = 2
-    csv_logs_buffer = np.empty(
-        [csv_logs_buffer_size, csv_logs_colums_count], dtype=float
-    )
-
-    def on_start(self):
-        print("suite started")
-
-        # add handler to forward finished requests to csv exporter
-        self.environment.events.request.add_listener(self.request_success_listener)
-
-        # create directory for the benchmarks data (csv)
-        if not os.path.exists(self.dir):
-            os.mkdir(self.dir)
-
-        # create benchmark file with name "benchmark_<time in millisec>.csv"
-        current_time = time.time()
-        filename = (
-            "benchmark_"
-            + time.strftime("%H-%M-%S", time.localtime(current_time))
-            + "_"
-            + str(int(current_time * 1000))
-            + ".csv"
-        )
-        self.filename = os.path.join(self.dir, filename)
-        if not os.path.exists(self.filename):
-            open(self.filename, "w").close()
-
-        # write csv header
-        with open(self.filename, "a+") as f:
-            f.write("start_time,response_time\n")
-
-    def on_stop(self):
-        self.write_statistic()
-        print("suite finished")
-
-    def request_success_listener(
-        self, start_time, response_time, response, exception, **_kwargs
-    ):
-        if exception or response.status_code != 200:
-            self.errors_during_test += 1
-            print(
-                "Error ocurred, HTTP status code was " + str(response.status_code) + "!"
-            )
-            return
-
-        self.saveStatistic(start_time, response_time)
-
-    def saveStatistic(self, start_time, response_time):
-        if self.csv_next_row_id >= self.csv_logs_buffer_size:
-            self.write_statistic()
-        self.csv_logs_buffer[self.csv_next_row_id] = [start_time, response_time]
-        self.csv_next_row_id += 1
-
-    def write_statistic(self):
-        with open(self.filename, "a+") as f:
-            csv_writer = csv.writer(f)
-
-            for i in range(self.csv_next_row_id):
-                csv_writer.writerow(self.csv_logs_buffer[i])
-            self.csv_next_row_id = 0
+    # lines are buffered in memory and written in batches
+    # to not interfere with the benchmark
+    results_buffer = []
+    results_buffer_size = 10_000
+    results_last_written_index = -1
 
     @task
     def benchmark(self):
-        for i in range(self.request_repetitions):
+        for _ in range(self.request_repetitions):
             self.client.get("/")
 
-        # stop benchmark
-        if hasattr(self, "debugFlag"):
-            # stop user and with that exit run_single_user() function
+        # respect a special flag that might be set when this is run from the cli
+        if hasattr(self, "stop_after_run") and self.stop_after_run:
             self.stop()
         else:
             self.environment.runner.quit()
 
+    def on_start(self):
+        self._create_csv_file()
+        assert self.results_filepath is not None
+        self.environment.events.request.add_listener(self.request_success_listener)
+        print(f"suite started. results will be written to {self.results_filepath}")
 
-# if launched directly, e.g. "python3 debugging.py", not "locust -f debugging.py"
+    def on_stop(self):
+        self._write_buffer()
+        print(f"suite finished. results written to {self.results_filepath}")
+
+    def request_success_listener(
+        self, start_time, response_time, response, exception, **kwargs
+    ):
+        if exception is not None or response.status_code != 200:
+            print(f"error ocurred. code: {response.status_code}. error: {exception}")
+            return
+
+        self._add_measurement_to_buffer(start_time, response_time)
+
+    def _create_csv_file(self):
+        self.results_directory.mkdir(parents=True, exist_ok=True)
+
+        now = time.time()
+        filename = f"benchmark_{time.strftime('%H-%M-%S', time.localtime(now))}_{int(now * 1000)}.csv"
+        self.results_filepath = self.results_directory.joinpath(filename)
+        self.results_filepath.touch(exist_ok=False)
+
+        # write csv header to file
+        with open(self.results_filepath, "a+") as f:
+            f.write("start_time,response_time\n")
+
+    def _add_measurement_to_buffer(self, start_time, response_time):
+        self.results_buffer.append((start_time, response_time))
+
+        # check if we potentially need to write the buffer to disk
+        num_writeable = len(self.results_buffer) - self.results_last_written_index - 1
+        if num_writeable >= self.results_buffer_size:
+            self._write_buffer()
+
+    def _write_buffer(self):
+        with open(self.results_filepath, "a+") as f:
+            last_index = len(self.results_buffer)
+            for i in range(self.results_last_written_index + 1, last_index):
+                start_time, response_time = self.results_buffer[i]
+                f.write(f"{start_time:f},{response_time:.10f}\n")
+            self.results_last_written_index = last_index - 1
+
+
 if __name__ == "__main__":
-    BenchmarkSetup.debugFlag = True
+    # instruct Locust to do one run and then stop (local debugging)
+    BenchmarkSetup.stop_after_run = True
     BenchmarkSetup.host = "http://host.docker.internal:8080"
     run_single_user(BenchmarkSetup)

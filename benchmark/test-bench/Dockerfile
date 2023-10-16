@@ -1,16 +1,10 @@
-FROM locustio/locust
+FROM locustio/locust:2.17.0
+
 WORKDIR /opt/locust
 
-COPY requirements.txt ./requirements.txt
-RUN pip install -r ./requirements.txt
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 
-COPY locustfile.py /mnt/locust/locustfile.py
-COPY locustfile.py locustfile.py
-
-# needed so locust can write csv files to mounted volume
-User root
-RUN mkdir cvs_exports
-# RUN chmod 777 cvs_exports/
-# User locust
+COPY locustfile.py ./
 
 EXPOSE 8089
