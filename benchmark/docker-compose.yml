@@ -27,3 +27,11 @@ services:
       - "8089:8089"
     volumes:
       - ./benchmark_results:/tmp/benchmark_results
+
+  # this is only for building the image
+  # with 'docker compose --profile with-readhook build'
+  readhook:
+    profiles:
+      - with-readhook
+    image: readhook
+    build: ../hook
