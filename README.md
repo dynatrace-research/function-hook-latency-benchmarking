@@ -3,6 +3,9 @@
 This repository contains the source code for the paper 📜 [Benchmarking Function Hook Latency in Cloud-Native Environments](https://arxiv.org/#)
 which we published at the 14th Symposium on Software Performance (SSP) in 2023.
 
+> **Note**
+> This project is not officially supported by Dynatrace.
+
 The repository is structured as follows:
 
 - [`/benchmark`](./benchmark/) contains the Locust load generator, the system under test (SUT), and the Kubernetes manifests for deploying them
