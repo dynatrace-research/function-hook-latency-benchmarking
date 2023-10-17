@@ -1,3 +1,6 @@
+# Mounted or copied benchmark results
+benchmark_results/
+
 # IDEs and Editors
 .idea/
 .vscode/*
