@@ -13,8 +13,8 @@ FROM eclipse-temurin:21-jre-jammy
 
 WORKDIR /opt/app
 
-COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
+COPY --from=builder /opt/app/target/*.jar /opt/app/sut.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/opt/app/*.jar" ]
+ENTRYPOINT ["java", "-jar", "/opt/app/sut.jar" ]
