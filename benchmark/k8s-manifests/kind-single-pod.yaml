@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: locust-single-pod
+  name: locust
   labels:
-    app.kubernetes.io/name: locust-single-pod
+    app.kubernetes.io/name: locust
     app.kubernetes.io/part-of: benchmark
 spec:
   type: ClusterIP
