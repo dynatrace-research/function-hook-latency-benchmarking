@@ -18,6 +18,23 @@ repos:
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
 
+  # license checks
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.4
+    hooks:
+      - id: insert-license
+        name: add license header to c files
+        files: \.[ch]$
+        args: [--license-filepath, LICENSE_HEADER.txt, --comment-style, "//"]
+      - id: insert-license
+        name: add license header to java files
+        files: \.java$
+        args: [--license-filepath, LICENSE_HEADER.txt, --comment-style, "//"]
+      - id: insert-license
+        name: add license header to python files
+        files: \.py$
+        args: [--license-filepath, LICENSE_HEADER.txt, --comment-style, "#"]
+
   # python projects
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
@@ -47,5 +64,6 @@ repos:
     rev: v2.11.0
     hooks:
       - id: pretty-format-java
+        name: format with google java formatter
         args: [--autofix]
         files: \.java$
