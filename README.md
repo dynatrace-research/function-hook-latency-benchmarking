@@ -198,14 +198,14 @@ Let's start by creating a namespace for our benchmark:
 kubectl create namespace benchmark
 ```
 
-Then, we take the `aws-single-pod.yaml.template` manifest and need to change the `REPOSITORY_URL` variable and deploy it.
+Then, we take the `aws-single-pod.template.yaml` manifest and need to change the `REPOSITORY_URL` variable and deploy it.
 If you use Windows, change this value manually in the file. With Bash, you can use the following command:
 
 ```sh
 cd benchmark
 export AWS_ACCOUNT_ID=YOUR_AWS_ACCOUNT_ID
 export REGION=YOUR_AWS_REGION
-cat ./k8s-manifests/aws-single-pod.yaml.template \
+cat ./k8s-manifests/aws-single-pod.template.yaml \
   | sed -e 's@${REPOSITORY_URL}@'"${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com"'@g' \
   | kubectl apply -n benchmark -f -
 ```
@@ -262,14 +262,14 @@ export NODE_HOSTNAME_FOR_LOCUST=MANUALLY_COPY_THE_FIRST_HOSTNAME_FROM_ABOVE
 export NODE_HOSTNAME_FOR_SUT=MANUALLY_COPY_THE_SECOND_HOSTNAME_FROM_ABOVE
 ```
 
-Then, we take the `aws-different-nodes.yaml.template` manifest and need to change the `REPOSITORY_URL`, `NODE_HOSTNAME_FOR_LOCUST`, and `NODE_HOSTNAME_FOR_SUT` variables and deploy it.
+Then, we take the `aws-different-nodes.template.yaml` manifest and need to change the `REPOSITORY_URL`, `NODE_HOSTNAME_FOR_LOCUST`, and `NODE_HOSTNAME_FOR_SUT` variables and deploy it.
 If you use Windows, change these values manually in the file. With Bash, you can use the following command:
 
 ```sh
 cd benchmark
 export AWS_ACCOUNT_ID=YOUR_AWS_ACCOUNT_ID
 export REGION=YOUR_AWS_REGION
-cat ./k8s-manifests/aws-different-nodes.yaml.template \
+cat ./k8s-manifests/aws-different-nodes.template.yaml \
   | sed -e 's@${REPOSITORY_URL}@'"${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com"'@g' \
   | sed -e 's@${NODE_HOSTNAME_FOR_LOCUST}@'"${NODE_HOSTNAME_FOR_LOCUST}"'@g' \
   | sed -e 's@${NODE_HOSTNAME_FOR_SUT}@'"${NODE_HOSTNAME_FOR_SUT}"'@g' \
