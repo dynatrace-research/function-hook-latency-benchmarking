@@ -1,6 +1,6 @@
 # Benchmarking Function Hook Latency in Cloud-Native Environments
 
-This repository contains the source code for the paper 📜 [Benchmarking Function Hook Latency in Cloud-Native Environments](https://arxiv.org/#)
+This repository contains the source code for the paper 📜 [Benchmarking Function Hook Latency in Cloud-Native Environments](https://arxiv.org/abs/2310.12702)
 which we published at the 14th Symposium on Software Performance (SSP) in 2023.
 
 > **Note**
@@ -35,17 +35,20 @@ we recommend researchers and engineers who benchmark function hook latency in cl
 
 ## Citation
 
-If this is useful for your work, please cite us as follows:
+If this is useful for your work, you can cite our pre-print as follows.
+The conference version will be available at a later point in time.
 
 ```bibtex
-@inproceedings{Kahlhofer2023:BenchmarkingFunctionHookLatency,
+@online{Kahlhofer2023:BenchmarkingFunctionHookLatency,
   title = {Benchmarking {{Function Hook Latency}} in {{Cloud-Native Environments}}},
   author = {Kahlhofer, Mario and Kern, Patrick and Henning, Sören and Rass, Stefan},
-  booktitle = {14th {{Symposium}} on {{Software Performance}}},
-  series = {{{SSP}} '23},
-  date = {2023-11-07},
-  location = {{Karlsruhe, Germany}}
-  publisher = {{Gesellschaft für Informatik e.V.}},
+  date = {2023-10-19},
+  eprint = {2310.12702},
+  eprinttype = {arxiv},
+  eprintclass = {cs},
+  doi = {10.48550/arXiv.2310.12702},
+  urldate = {2023-10-20},
+  pubstate = {preprint}
 }
 ```
 
