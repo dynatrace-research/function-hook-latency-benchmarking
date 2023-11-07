@@ -2,6 +2,7 @@
 
 This repository contains the source code for the paper 📜 [Benchmarking Function Hook Latency in Cloud-Native Environments](https://arxiv.org/abs/2310.12702)
 which we published at the 14th Symposium on Software Performance (SSP) in 2023.
+The presentation slides of that paper can be found [here](./ssp2023_presentation.pdf).
 
 > **Note**
 > This project is not officially supported by Dynatrace.
