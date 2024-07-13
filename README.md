@@ -41,15 +41,17 @@ The conference version will be available at a later point in time.
 
 ```bibtex
 @inproceedings{Kahlhofer2023:BenchmarkingFunctionHookLatency,
-  title = {Benchmarking {{Function Hook Latency}} in {{Cloud-Native Environments}}},
-  author = {Kahlhofer, Mario and Kern, Patrick and Henning, Sören and Rass, Stefan},
-  booktitle = {14th {{Symposium}} on {{Software Performance}}},
-  series = {{{SSP}} '23},
-  volume = {43},
+  title = {Benchmarking Function Hook Latency in Cloud-Native Environments},
+  author = {Kahlhofer, Mario and Kern, Patrick and Henning, S{\"o}ren and Rass, Stefan},
+  booktitle = {Softwaretechnik-Trends Band 43, Heft 4},
+  eventtitle = {14th Symposium on Software Performance},
+  publisher = {Gesellschaft f{\"u}r Informatik e.V.},
+  location = {Karlsruhe, Germany},
+  series = {SSP '23},
   pages = {11--13},
-  date = {2023-11-07},
-  location = {{Karlsruhe, Germany}},
-  publisher = {{Gesellschaft für Informatik e.V.}},
+  year = {2023},
+  month = nov,
+  issn = {0720-8928},
   url = {https://dl.gi.de/handle/20.500.12116/43246}
 }
 ```
